@@ -1,17 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import  store from './store'
+import addToCart  from './actions/ADD_TO_CART'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// 构建函数跟踪改变的state
+let unsubscribe = store.subscribe(()=>
+  console.log(store.getState())
+)
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+store.dispatch(addToCart('Coffee 500gm', 1, 250));
+store.dispatch(addToCart('Flour 1kg', 2, 110));
+store.dispatch(addToCart('Juice 2L', 1, 250));
+
+unsubscribe()
